@@ -1,0 +1,49 @@
+--drop earlier table if it has same name
+
+CREATE TABLE dept
+(
+    deptno number(2) constraint dept_deptno_pk PRIMARY KEY,
+    dname varchar2(20) NOT NULL,
+    loc varchar2(10)
+);
+
+drop table employee;
+
+CREATE TABLE employee
+(
+    empno NUMBER(6) constraint emp_empno_pk PRIMARY KEY,
+    empname VARCHAR2(30),
+    grade CHAR(2),
+    dob DATE,
+    deptno number(2) REFERENCES dept(deptno) ON DELETE CASCADE
+);
+
+--ON DELETE CASCADE means if departmanet removed then the employee of that department are also removed which is called as referential integraty..111
+
+
+
+INSERT INTO dept values(10,'Testing','Pune');
+INSERT INTO dept values(30,'Marketing','Mumbai');
+INSERT INTO dept values(40,'Developement','Chennai');
+
+INSERT INTO employee values(101,'Ramesh','A','1-Jan-1995',10);
+INSERT INTO employee values(102,'Suresh','A','11-Feb-1990',30);
+
+select * from employee;
+select * from dept;
+
+delete from dept where deptno=10;
+
+CREATE TABLE employee2
+(
+    empno NUMBER(6) PRIMARY KEY CHECK (empno > 2999),
+    empname VARCHAR2(30),
+    grade CHAR(2),
+    salary number(5) CHECK (salary>1000),
+    dob DATE CHECK (dob<'1-JAN-2000')
+  
+);
+
+select * from employee2;
+
+--UNIQUE::

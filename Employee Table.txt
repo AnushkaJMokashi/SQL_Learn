@@ -1,0 +1,31 @@
+CREATE TABLE employee
+(
+    empno NUMBER(6) PRIMARY KEY,
+    empname VARCHAR2(30) NOT NULL,
+    grade CHAR(3) DEFAULT 'TG0',
+    dob DATE,
+    deptno NUMBER(2)
+);
+
+drop table employee;
+
+INSERT INTO employee VALUES('101','Ramesh',DEFAULT,'11-May-2000',10);
+
+INSERT INTO employee VALUES(103,'null',DEFAULT,'11-May-2000',10); --error not null
+
+INSERT INTO employee VALUES(104,'Suresh',DEFAULT,'11-May-2000',10);
+INSERT INTO employee CALUES('101','Ramesh','A','11-May-2000',10);
+
+INSERT INTO employee VALUES(105,'Ganesh',null,'11-May-2000',10);
+
+SELECT * FROM employee;
+
+
+CREATE TABLE dept
+(
+    deptno number(2) constraint dept_deptno_pk PRIMARY KEY,
+    dname varchar2(20) NOT NULL,
+    loc varchar2(10)
+
+
+);

@@ -1,0 +1,31 @@
+CREATE TABLE px
+(
+    c1 NUMBER PRIMARY KEY,
+    c2 CHAR(10)
+);
+
+
+CREATE TABLE py
+(
+    c1 NUMBER REFERENCES px(c1),
+    c2 CHAR
+);
+
+
+ALTER TABLE px DROP COLUMN c1;
+--error connot drop parent key column
+
+ALTER TABLE px  DROP COLUMN CASCADE CONSTRAINTS;
+
+
+CREATE TABLE pz(c1 NUMBER, c2 , NUMBER , CONSTRAINT c1c2 CHECK(c1+c2>=10));
+	
+INSERT INTO pz values(1,2);  --CHECK CONSTRAINT VIOLATED
+
+INSERT INTO pz VALUES(10,20);  --multicolumn constraint
+
+ALTER TABLE pz DROP COLUMN c1; --cannot drop column
+ALTER TABLE pz DROP COLUMN c1 CASCADE CONSTRAINTS; 
+
+
+
